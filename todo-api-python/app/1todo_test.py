@@ -1,6 +1,6 @@
 import pytest
 from sqlalchemy.orm import Session
-from sql_app.models import ToDo
+from .sql_app.models import ToDo
 
 @pytest.fixture
 def session():
