@@ -1,0 +1,9 @@
+FROM python:3.12
+
+RUN pip install --upgrade pip
+RUN pip3 install locust
+
+WORKDIR /home/locust
+
+COPY ./locustfile_rust.py .
+COPY ./locust.conf .

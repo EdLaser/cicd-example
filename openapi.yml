@@ -1,0 +1,187 @@
+openapi: 3.1.0
+info:
+  title: Todo API
+  version: 1.0.0
+  description: A simple Todo API for testing CO2 measurement
+  contact: { "name": "No contact please." }
+servers:
+  - url: http://localhost:127.0.0.1:8000
+paths:
+  /:
+    get:
+      tags: ["todo"]
+      summary: List Todos
+      description: List all Todos
+      operationId: "getAllTodos"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseBody"
+  /todo/{todo_id}:
+    get:
+      summary: Get Todo by ID
+      tags: ["todo"]
+      description: Get Todo by ID
+      operationId: "getSingleTodo"
+      parameters:
+        - name: todo_id
+          in: path
+          description: ID of the Todo
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseBody"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+  /done/{todo_id}:
+    put:
+      summary: Mark Todo as Done
+      tags: ["todo"]
+      description: Mark Todo as Done
+      operationId: MarkAsDone
+      parameters:
+        - name: todo_id
+          in: path
+          description: ID of the Todo
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodoResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+  /new_todo:
+    post:
+      summary: Create Todo
+      tags: ["todo"]
+      description: Create Todo
+      operationId: CreateTodo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewTodo"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreatedResponse"
+  /delete/{todo_id}:
+    delete:
+      summary: Delete Todo by ID
+      tags: ["todo"]
+      description: Delete Todo by ID
+      operationId: DeleteTodo
+      parameters:
+        - name: todo_id
+          in: path
+          description: ID of the Todo
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodosResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+components:
+  schemas:
+    NewTodo:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the Todo
+        description:
+          type: string
+          description: The description of the Todo
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: The ID of the Todo
+        title:
+          type: string
+          description: The title of the Todo
+        description:
+          type: string
+          description: The description of the Todo
+        done:
+          type: boolean
+          description: Indicates whether the Todo is done or not
+    ResponseBody:
+      oneOf:
+        - $ref: "#/components/schemas/MessageResponse"
+        - $ref: "#/components/schemas/TodoResponse"
+        - $ref: "#/components/schemas/TodosResponse"
+    Response:
+      type: object
+      properties:
+        body:
+          $ref: "#/components/schemas/ResponseBody"
+    MessageResponse:
+      type: string
+
+    TodosResponse:
+      type: object
+      properties:
+        Todos:
+          type: array
+          description: The List of all todos in the Database
+          items:
+            $ref: '#/components/schemas/Todo'
+    TodoResponse:
+      type: object
+      properties:
+        Todo:
+          type: object
+          description: A single todo form the database
+          $ref: '#/components/schemas/Todo'
+    NotFoundResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The message of the error
+    CreatedResponse:
+      type: object
+      properties:
+        Todo:
+          type: object
+          description: The created todo
+          $ref: '#/components/schemas/Todo'
