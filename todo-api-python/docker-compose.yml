@@ -19,7 +19,7 @@ services:
       - db
     build: .
     environment:
-      DATABASE_URL: postgres://mysecretuser:mysecretpassword@db:5432/todos
+      DATABASE_URL: postgresql://mysecretuser:mysecretpassword@db:5432/todos
     ports:
       - 8000:8000
     networks:
