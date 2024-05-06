@@ -65,9 +65,8 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@v5
-        working-directory: ./todo-api-python
         with:
-          context: .
+          context: ./todo-api-python
           platforms: linux/amd64,linux/arm64
           tags: todo-api:latest
 
