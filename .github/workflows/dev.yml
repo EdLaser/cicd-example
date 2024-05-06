@@ -120,12 +120,17 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
 
-      - name: Build Image
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5.5.1
+        with:
+          images: ghcr.io/${{ github.repository }}
+
+      - name: Build Image and push to registry
         uses: docker/build-push-action@v5
         with:
           context: ./todo-api-python
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: |
-            todo-api:latest
-            todo-api:${{ github.sha }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
