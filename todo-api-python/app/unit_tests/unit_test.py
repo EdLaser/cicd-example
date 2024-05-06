@@ -2,8 +2,8 @@ import pytest
 from os import environ
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from .sql_app.models import ToDo
-from .sql_app.models import Base
+from sql_app.models import ToDo
+from sql_app.models import Base
 
 
 @pytest.fixture
