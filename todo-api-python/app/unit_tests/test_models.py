@@ -4,8 +4,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sql_app.models import ToDo
 from sql_app.models import Base
-from app.sql_app.crud import get_todo, get_todos, create_todo, update_todo_status, delete_todo
-
 
 @pytest.fixture
 def session():
