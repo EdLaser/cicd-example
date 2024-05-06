@@ -12,7 +12,7 @@ jobs:
     name: Generate Documentation
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build HTML
         id: adocbuild
@@ -48,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -88,7 +88,7 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Dependencies
         working-directory: ./todo-api-python
         run: |
@@ -104,6 +104,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -122,4 +125,7 @@ jobs:
         with:
           context: ./todo-api-python
           platforms: linux/amd64,linux/arm64
-          tags: todo-api:latest
+          push: true
+          tags: |
+            todo-api:latest
+            todo-api:${{ github.sha }}
