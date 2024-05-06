@@ -64,8 +64,8 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and push
-        working-directory: ./todo-api-python
         uses: docker/build-push-action@v5
+        working-directory: ./todo-api-python
         with:
           context: .
           platforms: linux/amd64,linux/arm64
