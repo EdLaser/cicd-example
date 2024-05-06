@@ -1,0 +1,129 @@
+= Todo API Documentation
+:toc: macro
+:toc-title:
+
+toc::[]
+
+== Overview
+*Version:* 1.0.0 +
+*Description:* A simple Todo API for testing CO2 measurement. +
+*Contact:* No contact please.
+
+== Servers
+Base URL: http://localhost:127.0.0.1:8000
+
+== Endpoints
+
+=== List Todos
+
+*Path:* `/` +
+*Method:* GET +
+*Tags:* todo +
+*Summary:* List all Todos +
+*Operation ID:* getAllTodos
+
+*Responses:*
+
+* `200` - OK +
+  - *Content-Type:* `application/json` +
+  - *Schema:* ResponseBody
+
+=== Get Todo by ID
+
+*Path:* `/todo/{todo_id}` +
+*Method:* GET +
+*Tags:* todo +
+*Summary:* Get Todo by ID +
+*Operation ID:* getSingleTodo
+
+*Parameters:*
+
+- *Name:* todo_id +
+  - *In:* path +
+  - *Description:* ID of the Todo +
+  - *Required:* true +
+  - *Type:* integer
+
+*Responses:*
+
+* `200` - OK +
+  - *Content-Type:* `application/json` +
+  - *Schema:* ResponseBody
+* `404` - Not Found +
+  - *Content-Type:* `application/json` +
+  - *Schema:* NotFoundResponse
+
+=== Mark Todo as Done
+
+*Path:* `/done/{todo_id}` +
+*Method:* PUT +
+*Tags:* todo +
+*Summary:* Mark Todo as Done +
+*Operation ID:* MarkAsDone
+
+*Parameters:*
+
+- *Name:* todo_id +
+  - *In:* path +
+  - *Description:* ID of the Todo +
+  - *Required:* true +
+  - *Type:* integer
+
+*Responses:*
+
+* `200` - OK +
+  - *Content-Type:* `application/json` +
+  - *Schema:* TodoResponse
+* `404` - Not Found +
+  - *Content-Type:* `application/json` +
+  - *Schema:* NotFoundResponse
+
+=== Create Todo
+
+*Path:* `/new_todo` +
+*Method:* POST +
+*Tags:* todo +
+*Summary:* Create Todo +
+*Operation ID:* CreateTodo
+
+*Request Body:*
+
+- *Required:* true +
+  - *Content-Type:* `application/json` +
+  - *Schema:* NewTodo
+
+*Responses:*
+
+* `201` - Created +
+  - *Content-Type:* `application/json` +
+  - *Schema:* CreatedResponse
+
+=== Delete Todo by ID
+
+*Path:* `/delete/{todo_id}` +
+*Method:* DELETE +
+*Tags:* todo +
+*Summary:* Delete Todo by ID +
+*Operation ID:* DeleteTodo
+
+*Parameters:*
+
+- *Name:* todo_id +
+  - *In:* path +
+  - *Description:* ID of the Todo +
+  - *Required:* true +
+  - *Type:* integer
+
+*Responses:*
+
+* `200` - OK +
+  - *Content-Type:* `application/json` +
+  - *Schema:* TodosResponse
+* `404` - Not Found +
+  - *Content-Type:* `application/json` +
+  - *Schema:* NotFoundResponse
+
+== Components Schemas
+
+[NOTE]
+Refer to the `components` section of the OpenAPI document for definitions of all schemas mentioned in this documentation.
