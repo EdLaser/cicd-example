@@ -7,8 +7,7 @@ on:
     branches: ["main"]
 
 jobs:
-
-  generate-documenation:
+  generate-documentation:
     runs-on: ubuntu-latest
     name: Generate Documentation
     steps:
@@ -19,23 +18,23 @@ jobs:
         id: adocbuild
         uses: tonynv/asciidoctor-action@master
         with:
-            program: "asciidoctor -D . --backend=html5 documenation.adoc"
+            program: "asciidoctor -D . --backend=html5 documentation.adoc"
      
       - uses: actions/upload-artifact@v4
         with:
           name: documentation_html
-          path: document.html
+          path: documentation.html
       
       - name: Build PDF
         uses: avattathil/asciidoctor-action@master
         with:
-          program: "asciidoctor-pdf -a allow-uri-read -D . documenation.adoc"
+          program: "asciidoctor-pdf -a allow-uri-read -D . documentation.adoc"
 
-       - name: Upload PDF Artifact
+      - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: documenation_pdf
-          path: documenation.pdf
+          name: documentation_pdf
+          path: documentation.pdf
 
 
   build:
@@ -59,7 +58,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-     strategy:
+    strategy:
       max-parallel: 4
       matrix:
         python-version: [3.9, "3.10", 3.11]
