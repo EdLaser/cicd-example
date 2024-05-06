@@ -1,4 +1,4 @@
-from schemas import ToDo
+from sql_app.schemas import ToDo
 
 
 def test_create_todo_with_valid_data():
