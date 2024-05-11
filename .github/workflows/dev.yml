@@ -10,6 +10,8 @@ jobs:
   generate-documentation:
     runs-on: ubuntu-latest
     name: Generate Documentation
+    env:
+      PYTHONPATH: ${{ github.workspace }}/todo-api-python
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
