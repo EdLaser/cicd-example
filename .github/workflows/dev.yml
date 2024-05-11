@@ -12,6 +12,15 @@ jobs:
     name: Generate Documentation
     env:
       PYTHONPATH: ${{ github.workspace }}/todo-api-python
+    services:
+      db:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: mysecretuser
+          POSTGRES_PASSWORD: mysecretpassword
+          POSTGRES_DB: todos
+        ports:
+          - 5432:5432
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
