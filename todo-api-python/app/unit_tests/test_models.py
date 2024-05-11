@@ -51,7 +51,7 @@ def test_get_todo(session):
     session.commit()
 
     # Test getting the todo by ID
-    result = session.query(ToDo).get(todo.id)
+    result = session.get(todo.id)
     assert result.title == "Test Todo"
     assert result.description == "Test Description"
 
