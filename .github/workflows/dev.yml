@@ -65,13 +65,13 @@ jobs:
         env:
           DATABASE_URL: "postgresql://mysecretuser:mysecretpassword@localhost/todos"
         run: |
-          pdoc3 ./app/main.py -o ./docs
+          pdoc3 --html ./app/main.py -o ${{github.workspace}}/docs
 
       - name: Upload Code Documentation as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: api_documentation
-          path: ./docs
+          path: ${{github.workspace}}/docs
   build:
     runs-on: ubuntu-latest
     needs: generate-documentation
