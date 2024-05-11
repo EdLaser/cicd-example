@@ -42,20 +42,17 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install pdoc3
-        run: pip install pdoc3
-
       - name: Generate API Documentation
         working-directory: ./todo-api-python/
         run: |
-          pdoc3 app --output-dir docs
-          pdoc3 app/sql_app --output-dir docs
+          pydoc ./app
+          pydoc ./app/sql_app
 
       - name: Upload Code Documentation as Artifact
         uses: actions/upload-artifact@v3
         with:
           name: api_documentation
-          path: docs/
+          path: ./todo-api-python
   build:
     runs-on: ubuntu-latest
     needs: generate-documentation
