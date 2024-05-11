@@ -50,7 +50,7 @@ jobs:
       - name: Generate API Documentation
         working-directory: ./todo-api-python/
         run: |
-          pdoc3 --pdf ./app -o ./docs
+          pdoc3 ./app/main.py -o ./docs
 
       - name: Upload Code Documentation as Artifact
         uses: actions/upload-artifact@v3
