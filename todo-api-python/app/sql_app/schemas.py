@@ -12,6 +12,16 @@ class ToDoCreate(ToDoBase):
 
 
 class ToDo(ToDoBase):
+    """
+    Represents a ToDo item with additional metadata.
+
+    Attributes:
+        id (int): Unique identifier for the ToDo item.
+        title (str): Title of the ToDo item.
+        description (str): Detailed description of the ToDo item.
+        is_done (bool): Status of the ToDo item, indicating completion.
+    """
+
     id: int
     title: str
     description: str

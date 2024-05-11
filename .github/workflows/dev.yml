@@ -37,6 +37,25 @@ jobs:
           name: documentation_pdf
           path: documentation.pdf
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install pdoc3
+        run: pip install pdoc3
+
+      - name: Generate API Documentation
+        working-directory: ./todo-api-python/
+        run: |
+          pdoc --html ./app --output-dir docs
+          pdoc --html ./app/sql_app --output-dir docs
+
+      - name: Upload Code Documentation as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: api_documentation
+          path: docs/
   build:
     runs-on: ubuntu-latest
     needs: generate-documentation
