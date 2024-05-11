@@ -10,8 +10,6 @@ jobs:
   generate-documentation:
     runs-on: ubuntu-latest
     name: Generate Documentation
-    env:
-      PYTHONPATH: ${{ github.workspace }}/todo-api-python
     services:
       db:
         image: postgres:latest
@@ -64,6 +62,8 @@ jobs:
 
       - name: Generate API Documentation
         working-directory: ./todo-api-python/
+        env:
+          DATABASE_URL: "postgresql://mysecretuser:mysecretpassword@localhost/todos"
         run: |
           pdoc3 ./app/main.py -o ./docs
 
