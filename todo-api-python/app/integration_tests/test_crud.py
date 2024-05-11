@@ -45,7 +45,7 @@ def test_get_todos(session):
 
     # Test getting all todos
     result = get_todos(session)
-    assert len(result) == 3
+    assert len(result) == 4
 
     # Test getting todos with pagination
     result = get_todos(session, skip=1, limit=2)
