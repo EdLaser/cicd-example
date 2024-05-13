@@ -61,12 +61,12 @@ jobs:
         run: pip install pdoc3
 
       - name: Generate API Documentation
-        working-directory: ./todo-api-python/
+        working-directory: ./todo-api-python/app
         env:
           DATABASE_URL: "postgresql://mysecretuser:mysecretpassword@localhost/todos"
         run: |
-          pdoc3 --html ./app/main.py -o ${{github.workspace}}/docs
-          pdoc3 --html ./app -o ${{github.workspace}}/docs
+          pdoc3 --html main.py -o ${{github.workspace}}/docs
+          pdoc3 --html . -o ${{github.workspace}}/docs
 
       - name: Upload Code Documentation as Artifact
         uses: actions/upload-artifact@v4
