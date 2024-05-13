@@ -75,7 +75,6 @@ jobs:
           path: ${{github.workspace}}/docs
   build:
     runs-on: ubuntu-latest
-    needs: generate-documentation
     strategy:
       max-parallel: 4
       matrix:
