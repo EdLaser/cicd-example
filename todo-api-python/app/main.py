@@ -1,8 +1,8 @@
-path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(path)
-
 import os
 import sys
+
+path = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(path)
 
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session

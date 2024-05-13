@@ -1,8 +1,9 @@
+import os
+import sys
+
 path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(path)
 
-import os
-import sys
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
