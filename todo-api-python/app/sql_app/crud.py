@@ -1,3 +1,9 @@
+path = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(path)
+
+import os
+import sys
+
 from sqlalchemy.orm import Session
 
 from . import models, schemas
