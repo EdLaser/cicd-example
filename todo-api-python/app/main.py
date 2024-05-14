@@ -13,9 +13,6 @@ from fastapi import status
 from sql_app import crud, models, schemas
 from sql_app.database import engine, get_db
 
-if os.getenv("RUN_APP", "False").lower() in ("true", "1", "t"):
-    models.Base.metadata.create_all(bind=engine)
-
 app = FastAPI()
 
 TODO_NOT_FOUND = "Todo not found"
@@ -129,6 +126,7 @@ def setup_routes(app):
 
 
 if __name__ == "__main__":
+    models.Base.metadata.create_all(bind=engine)
     setup_routes(app)
     import uvicorn
 
