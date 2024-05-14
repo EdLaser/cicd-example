@@ -4,10 +4,10 @@ import sys
 path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(path)
 
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import declarative_base
+from sqlalchemy import Boolean, Column, Integer, String
 
-from database import Base
+Base = declarative_base()
 
 
 class ToDo(Base):
