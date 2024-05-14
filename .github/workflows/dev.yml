@@ -65,7 +65,7 @@ jobs:
         env:
           DATABASE_URL: "postgresql://mysecretuser:mysecretpassword@localhost/todos"
         run: |
-          pdoc3 --html -o ${{github.workspace}}/docs ./main.py
+          pdoc3 --html -o ${{github.workspace}}/docs main.py
           pdoc3 --html -o ${{github.workspace}}/docs sql_app
 
       - name: Upload Code Documentation as Artifact
