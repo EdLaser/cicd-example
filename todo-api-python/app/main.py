@@ -18,7 +18,8 @@ app = FastAPI()
 TODO_NOT_FOUND = "Todo not found"
 
 
-def setup_routes(app):
+if __name__ == "__main__":
+    models.Base.metadata.create_all(bind=engine)
 
     @app.post("/api/new_todo", response_model=schemas.ToDo)
     def create_todo(todo: schemas.ToDoCreate, db: Session = Depends(get_db)):
@@ -124,10 +125,6 @@ def setup_routes(app):
             status_code=status.HTTP_200_OK, content=jsonable_encoder(db_todo)
         )
 
-
-if __name__ == "__main__":
-    models.Base.metadata.create_all(bind=engine)
-    setup_routes(app)
     import uvicorn
 
     uvicorn.run(app, host="127.0.0.1", port=8000)
