@@ -11,22 +11,14 @@ from fastapi.responses import JSONResponse
 from fastapi import status
 
 from sql_app import crud, models, schemas
-from sql_app.database import SessionLocal, engine
+from sql_app.database import engine, get_db
 
-models.Base.metadata.create_all(bind=engine)
+if os.getenv("RUN_APP", "False").lower() in ("true", "1", "t"):
+    models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
 TODO_NOT_FOUND = "Todo not found"
-
-
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 def setup_routes(app):
