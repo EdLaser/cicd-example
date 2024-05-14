@@ -66,6 +66,7 @@ jobs:
           DATABASE_URL: "postgresql://mysecretuser:mysecretpassword@localhost/todos"
         run: |
           pdoc3 --html ./app/main.py -o ${{github.workspace}}/docs
+          pdoc3 --html ./app/sql_app -o ${{github.workspace}}/docs
 
       - name: Upload Code Documentation as Artifact
         uses: actions/upload-artifact@v4
