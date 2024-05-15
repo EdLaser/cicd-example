@@ -5,14 +5,18 @@ from sqlalchemy.orm import sessionmaker
 from sql_app.models import ToDo
 from sql_app.models import Base
 
+
 @pytest.fixture
 def session():
     engine = create_engine(environ.get("DATABASE_URL"))
     Base.metadata.create_all(engine)
-    session_local = sessionmaker(
-        autocommit=False, autoflush=False, bind=engine)
+    session_local = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     db = session_local()
+    transaction = session.begin_nested()
+
     yield db
+
+    transaction.rollback()
     db.close()
 
 
@@ -63,8 +67,7 @@ def test_get_todo(session):
 def test_get_todos(session):
     # Create multiple sample todos
     todos = [
-        ToDo(title=f"Test Todo {i}",
-             description=f"Test Description {i}")
+        ToDo(title=f"Test Todo {i}", description=f"Test Description {i}")
         for i in range(3)
     ]
     session.add_all(todos)
@@ -72,7 +75,7 @@ def test_get_todos(session):
 
     # Test getting all todos
     result = session.query(ToDo).all()
-    assert len(result) == 6
+    assert len(result) == 3
 
     # Test getting todos with pagination
     result = session.query(ToDo).offset(1).limit(2).all()
