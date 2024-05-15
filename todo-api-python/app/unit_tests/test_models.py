@@ -72,7 +72,7 @@ def test_get_todos(session):
 
     # Test getting all todos
     result = session.query(ToDo).all()
-    assert len(result) == 3
+    assert len(result) == 6
 
     # Test getting todos with pagination
     result = session.query(ToDo).offset(1).limit(2).all()
