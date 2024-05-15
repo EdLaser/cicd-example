@@ -67,6 +67,7 @@ jobs:
           RUN_APP: "False"
         run: |
           pdoc3 --html -o ${{github.workspace}}/docs main.py
+          pdoc3 --html -o ${{github.workspace}}/docs sql_app
 
       - name: Upload Code Documentation as Artifact
         uses: actions/upload-artifact@v4
