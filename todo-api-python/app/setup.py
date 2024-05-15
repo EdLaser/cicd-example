@@ -16,5 +16,6 @@ setup(
         "psycopg2-binary==2.9.5",
         "wait-for-it==2.2.0",
         "pytest==7.2.2",
+        "httpx==0.23.3",
     ],
 )
