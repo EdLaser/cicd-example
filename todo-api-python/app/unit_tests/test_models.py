@@ -12,8 +12,7 @@ def session():
     Base.metadata.create_all(engine)
     session_local = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     db = session_local()
-    transaction = session.begin_nested()
-
+    transaction = db.begin_nested()
     yield db
 
     transaction.rollback()
