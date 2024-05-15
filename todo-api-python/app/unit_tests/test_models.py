@@ -22,7 +22,6 @@ def session():
 def test_create_todo(session):
     todo = ToDo(title="Test Todo", description="This is a test todo.")
     session.add(todo)
-    session.commit()
     assert todo.id is not None
     assert todo.title == "Test Todo"
     assert todo.description == "This is a test todo."
@@ -32,18 +31,14 @@ def test_create_todo(session):
 def test_update_todo(session):
     todo = ToDo(title="Test Todo", description="This is a test todo.")
     session.add(todo)
-    session.commit()
     todo.title = "Updated Todo"
-    session.commit()
     assert todo.title == "Updated Todo"
 
 
 def test_delete_todo(session):
     todo = ToDo(title="Test Todo", description="This is a test todo.")
     session.add(todo)
-    session.commit()
     session.delete(todo)
-    session.commit()
     assert session.query(ToDo).filter_by(id=todo.id).first() is None
 
 
@@ -51,10 +46,9 @@ def test_get_todo(session):
     # Create a sample todo
     todo = ToDo(title="Test Todo", description="Test Description")
     session.add(todo)
-    session.commit()
 
     # Test getting the todo by ID
-    result = session.get(todo.id)
+    result = session.get(ToDo, todo.id)
     assert result.title == "Test Todo"
     assert result.description == "Test Description"
 
@@ -70,7 +64,6 @@ def test_get_todos(session):
         for i in range(3)
     ]
     session.add_all(todos)
-    session.commit()
 
     # Test getting all todos
     result = session.query(ToDo).all()
