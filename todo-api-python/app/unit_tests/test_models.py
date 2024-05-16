@@ -38,6 +38,7 @@ def test_update_todo(session):
 def test_delete_todo(session):
     todo = ToDo(title="Test Todo", description="This is a test todo.")
     session.add(todo)
+    session.commit()
     session.delete(todo)
     assert session.query(ToDo).filter_by(id=todo.id).first() is None
 
@@ -49,6 +50,7 @@ def test_get_todo(session):
 
     # Test getting the todo by ID
     result = session.get(ToDo, todo.id)
+    session.commit()
     assert result.title == "Test Todo"
     assert result.description == "Test Description"
 
@@ -64,7 +66,7 @@ def test_get_todos(session):
         for i in range(3)
     ]
     session.add_all(todos)
-
+    session.commit()
     # Test getting all todos
     result = session.query(ToDo).all()
     assert len(result) == 3
